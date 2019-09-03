@@ -2,6 +2,6 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import Suldoc
+from .models import Taste_note
 
-admin.site.register(Suldoc)
+admin.site.register(Taste_note)

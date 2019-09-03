@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Suldoc(models.Model):
+class Taste_note(models.Model):
     user_id = models.CharField(max_length=30) # 유저 아이디
     name = models.CharField(max_length=100) # 술 이름
     comment = models.CharField(max_length=200) # 코멘트
