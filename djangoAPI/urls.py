@@ -1,15 +1,12 @@
-from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url, include
-from rest_framework import routers
-from suldocs.views import SuldocViewSet
-from suldocs import views
+from suldocs.views.user import User
+from suldocs.views.taste_note import TasteNote
 
-router = routers.DefaultRouter()
-router.register('suldocs', SuldocViewSet)
+# router = routers.DefaultRouter()
+# router.register('user', UserModel)
+
+from django.urls import path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('<int:note_id>/', views.detail, name='detail'),
+    path('', User.as_view(), name="user"),
+    path("taste", TasteNote.as_view(), name='taste'),
 ]
