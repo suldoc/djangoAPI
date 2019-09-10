@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  suldoc-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: 'mydatabase'
+      MYSQL_USER: 'suldoc'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'mypassword'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
