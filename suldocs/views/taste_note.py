@@ -12,7 +12,22 @@ class TasteNote(APIView):
         return Response(taste_notes_serialize.data)
 
     def post(self, request):
-        note_data = request.data
+        try:
+            note_data = request.data
 
-        return Response({"":""})
+            tastenote_data = TasteNoteModel()
 
+            if note_data['user_id']:
+                tastenote_data.user_id = note_data['user_id']
+                tastenote_data.name = note_data['name']
+                tastenote_data.comment = note_data['comment']
+                tastenote_data.stars_taste = note_data['stars_taste']
+                tastenote_data.stars_costvalue = note_data['stars_costvalue']
+                tastenote_data.img_path = note_data['img_path']
+
+                tastenote_data.save()
+
+            return Response({"Result":"SUCCESS"})
+
+        except (ValueError, TypeError) as e:
+            return Response({"Result":e})
