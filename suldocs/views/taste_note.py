@@ -17,7 +17,9 @@ class TasteNote(APIView):
 
             tastenote_data = TasteNoteModel()
 
-            if note_data['user_id']:
+            note_data_keys = ['user_id', 'name', 'comment', 'stars_taste', 'stars_costvalue', 'img_path']
+
+            if list(note_data.keys()) == note_data_keys:
                 tastenote_data.user_id = note_data['user_id']
                 tastenote_data.name = note_data['name']
                 tastenote_data.comment = note_data['comment']
@@ -26,6 +28,9 @@ class TasteNote(APIView):
                 tastenote_data.img_path = note_data['img_path']
 
                 tastenote_data.save()
+
+            else:
+                return Response({"Result":"is not allowed"})
 
             return Response({"Result":"SUCCESS"})
 
