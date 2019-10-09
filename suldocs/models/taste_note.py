@@ -8,7 +8,7 @@ class TasteNoteModel(models.Model):
     comment = models.CharField(max_length=200)  # 코멘트
     stars_taste = models.FloatField()  # 맛 평가
     stars_costvalue = models.FloatField()  # 가성비 평가
-    img_path = models.CharField(max_length=1000)  # 이미지 경로
+    img_path = models.ImageField(upload_to='images/%Y/%m/%d')  # 이미지 경로
     created_at = models.DateTimeField(auto_now_add=True)  # 작성 시간
     updated_at = models.DateTimeField(auto_now=True)  # 수정시간
 

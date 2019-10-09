@@ -1,7 +1,11 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.shortcuts import render
+from django.http import HttpResponse
+
 from suldocs.models.taste_note import TasteNoteModel, TasteNoteSerializer
+from suldocs.form import PostForm
 
 
 class TasteNote(APIView):
@@ -36,3 +40,18 @@ class TasteNote(APIView):
 
         except (ValueError, TypeError) as e:
             return Response({"Result":e})
+
+
+def TasteNoteDB(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+
+        note_data = form.save(commit=False)
+        if form.is_valid():
+            note_data.save()
+
+        return render(request, 'notes/db.html', {"form": form})
+
+    if request.method == "GET":
+        form = PostForm()
+        return render(request, 'notes/db.html', {"form": form})
