@@ -8,15 +8,10 @@
 
 <form action='' method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
-    <!--{{form.as_p}}-->
+    지금까지 전체 {{num}}개 입력되었습니다.
 
-    userID: <input type="text" name="user_id" value="Yvonne"><br>
-    술이름: <input type="text" name="name"><br>
-    코멘트: <textarea rows="5" cols="80" id="comment"></textarea><br>
-    맛점수: <input type="number" step="0.01" name="stars_taste"><br>
-    가성비: <input type="number" step="0.01" name="stars_costvalue"><br>
-    이미지: <input type="file" name="img_path"><br>
-    <br>
+    {{form.as_p}}
+
     <button type="submit">저장하기</button></form>
 </form>
 

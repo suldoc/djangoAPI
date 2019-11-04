@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from suldocs.models.taste_note import TasteNoteModel, TasteNoteSerializer
 from suldocs.form import PostForm
 
+from suldocs import dbconnetion
+
 
 class TasteNote(APIView):
     def get(self, request):
@@ -50,7 +52,17 @@ def TasteNoteDB(request):
         if form.is_valid():
             note_data.save()
 
-        return render(request, 'notes/db.html', {"form": form})
+        #TODO: html화면 변경(모바일대응, 저장 후 피드백, 술종류 선택)
+        conn = dbconnetion.get_connection()
+        cur = dbconnetion.get_cursor(conn)
+
+        SQL = "SELECT COUNT(*) AS count FROM suldocs_tastenotemodel"
+        cur.execute(SQL)
+        num = cur.fetchall()
+        num = num[0]['count']
+        # print(num[0]['count'])
+
+        return render(request, 'notes/db.html', {"form": form, "num": num})
 
     if request.method == "GET":
         form = PostForm()
